@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.undefined.mapper.UndefinedMapper">
+    <select id = "userinfo" parameterType="com.undefined.domain.und_user" resultType="com.undefined.domain.und_user">
+        select * from user
+    </select>
+    
+    <select id ="und_fems_log" resultType="com.undefined.domain.und_fems_log">
+        select * from fems_log_2february
+    </select>
+    
+    <select id = "ten_minute_chart" resultType="com.undefined.domain.und_result_sensor">
+        SELECT *
+from (
+	SELECT * FROM result_sensor WHERE 1 = 1 order by sensor_time desc LIMIT 9
+) AS REVERSE
+ORDER BY sensor_time ASC;
+        	<!--  select * from result_sensor where sensor_time like concat('2022-09-16 12:5','%')-->
+        <!--   <![CDATA[  
+        SELECT * from undefined.result_sensor WHERE sensor_time like concat('2022-09-16 12:5','%')
+        ]]>    -->
+    </select>
+    
+    <select id="fire_info" resultType="com.undefined.domain.und_fire_station">
+        select * from undefined.fire_station
+    </select>
+    
+    <select id ="fire_info_gwangju" parameterType="int" resultType="com.undefined.domain.und_fire_station">
+        <![CDATA[
+        select * from undefined.fire_station WHERE fire_seq IN (select fire_seq from undefined.fire_station where fire_locate LIKE concat('%','광주광역시','%')) AND fire_seq = #{fire_seq};  
+        ]]> 
+    </select>
+    
+    <select id="ai_hub_data" resultType="com.undefined.domain.und_ai_hub_data">
+        SELECT ahd_time, ahd_label FROM ai_hub_data ORDER BY ahd_time ASC LIMIT 20;
+    </select>
+    
+    <select id ="und_fems_power" resultType="com.undefined.domain.und_fems_log">
+        SELECT distinct fems_power from fems_log_2february WHERE fems_power >= 0;
+    </select>
+    <select id ="und_fems_react_power" resultType="com.undefined.domain.und_fems_log">
+        SELECT fems_react_power FROM fems_log_2february LIMIT 20;
+    </select>
+    <select id ="und_fems_volt" resultType="com.undefined.domain.und_fems_log">
+        SELECT distinct fems_volt FROM fems_log_2february WHERE fems_volt >=300;
+    </select>
+</mapper> 
