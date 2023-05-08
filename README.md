@@ -40,14 +40,15 @@
 3-1) 모델링 검증 방안 : 학습에 사용하지 않은 test 데이터셋으로 검증
 
 3-2 모델링 평가 결과
-▪️ 공조 설비 전력 패턴 데이터
+
+🔸 공조 설비 전력 패턴 데이터
 
 - KNeighborsClassifier 정확도 : 99.65%
 - DecisionTreeClassifier 정확도 : 99.48%
 - RandomForestClassifier 정확도 : 99.63%
 - keras Deeplearning model정확도 : 99.48%
 
-▪️ 공장 에너지관리 시스템 (FEMS)
+🔸 공장 에너지관리 시스템 (FEMS)
 
 - keras Deeplearning model정확도 : 100%
 
